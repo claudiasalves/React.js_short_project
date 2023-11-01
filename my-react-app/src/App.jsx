@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Loading from './Loading';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -22,16 +23,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Users</h1>
-        {!loading 
-        ? users.map((user, index) => (
-          <div key={index}>
-            <h3>{user.name.first} {user.name.last}</h3>
-            <p>{user.email}</p>
-            <hr />
-          </div>
-        ))
-      : "loading"}
+      {!loading ? 
+      (users.map((user, index) => (
+        <div key={index}>
+          <h3>{user.name.first} {user.name.last}</h3>
+          <p>{user.email}</p>
+          <hr />
+        </div>
+      ))
+      ) : (
+      <Loading message="Loading" />
+      )}
     </div>
   );
 }

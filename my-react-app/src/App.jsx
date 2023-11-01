@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Loading from './Loading';
+import './App.css'
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -29,19 +30,20 @@ function App() {
 
   return (
     <div className="App">
-      {!loading ? 
-      (users.map((user, index) => (
-        <div key={index}>
-          <h3>{user.name.first} {user.name.last}</h3>
-          <p>{user.email}</p>
-          <hr />
-          <form onSubmit={handleSubmit}>
-            <input type="submit" value="load users"></input>
-          </form>
-        </div>
-      ))
+      {loading ? ( 
+        <Loading message="Loading" />
       ) : (
-      <Loading message="Loading" />
+        <div>
+          <form className="button" onSubmit={handleSubmit}>
+            <input type="submit" value="load users" />
+          </form>
+          {users.map((user, index) => (
+            <div key={index}>
+              <h3 className="h3"> {user.name.first} {user.name.last}</h3>
+              <p className="email">{user.email}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
